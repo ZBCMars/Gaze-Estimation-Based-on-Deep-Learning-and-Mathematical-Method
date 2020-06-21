@@ -1,0 +1,2 @@
+The 3Dgenerate.py needs to call the face-alignment(**Note:** The lua version is available: https://github.com/1adrianb/2D-and-3D-face-alignment
+) module to extract the feature points of the face to generate the face label set.
