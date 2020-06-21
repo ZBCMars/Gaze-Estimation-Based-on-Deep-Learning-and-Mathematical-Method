@@ -4,6 +4,7 @@ import argparse
 
 import coloredlogs
 import tensorflow as tf
+import os
 
 if __name__ == '__main__':
 
@@ -19,6 +20,7 @@ if __name__ == '__main__':
     )
 
     # Initialize Tensorflow session
+    os.environ['CUDA_VISIBLE_DEVICES']='1'
     tf.logging.set_verbosity(tf.logging.ERROR)
     gpu_options = tf.GPUOptions(allow_growth=True)
     with tf.Session(config=tf.ConfigProto(gpu_options=gpu_options)) as session:
@@ -37,7 +39,7 @@ if __name__ == '__main__':
             session,
             batch_size=batch_size,
             data_format='NCHW',
-            unityeyes_path='/home/xiehuan/datasets/UnityEyes_Windows/imgs',
+            unityeyes_path='/home/zhangbochen/imgs',
             min_after_dequeue=1000,
             generate_heatmaps=True,
             shuffle=True,
@@ -86,6 +88,7 @@ if __name__ == '__main__':
                     'loss_terms_to_optimize': {
                         'heatmaps_mse': ['hourglass'],
                         'radius_mse': ['radius'],
+                        #'landmarks_mse':['upscale'],
                     },
                     'learning_rate': 1e-3,
                 },
